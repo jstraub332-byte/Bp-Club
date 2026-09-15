@@ -1,1 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en" data-density="standard">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BP CLUB™ // DEFENSE METABOLIC & BIOMECHANICAL DOSSIER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030407;
+      --bg-panel: rgba(9, 11, 16, 0.88);
+      --bg-panel-solid: #090b10;
+      --bg-card: rgba(14, 18, 26, 0.65);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --border-red: rgba(255, 36, 79, 0.35);
+      --red: #ff244f;
+      --red-dim: rgba(255, 36, 79, 0.12);
+      --cyan: #00efff;
+      --green: #00ff88;
+      --gold: #f59e0b;
+      --white: #f8fafc;
+      --text: #cbd5e1;
+      --muted: #64748b;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+      --serif: 'Cinzel', serif;
+      --radius: 6px;
+      --spacing: 1rem;
+    }
 
+    [data-density="compact"] {
+      --spacing: 0.65rem;
+      font-size: 0.92rem;
+    }
+
+    [data-density="archive"] {
+      --spacing: 1.35rem;
+      font-size: 1.02rem;
+    }
+
+    body.high-contrast {
+      --bg: #000000;
+      --bg-panel: #050505;
+      --border: rgba(255, 255, 255, 0.35);
+      --muted: #94a3b8;
+      --text: #ffffff;
+    }
+
+    body.no-grid { background-image: none !important; }
+    body.no-crt:before, body.no-scan:after { display: none !important; }
+    body.brotha-mode { filter: invert(1) hue-rotate(180deg) contrast(1.15) !important; }
+    body.jbg-mode { --red: #00efff; --red-dim: rgba(0, 239, 255, 0.15); filter: contrast(1.2); }
+    body.compromised { animation: compTremor 0.1s infinite !important; }
+    @keyframes compTremor {
+      0% { transform: translate(0,0); }
+      50% { transform: translate(1px, -1px); }
+      100% { transform: translate(-1px, 1px); }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+      line-height: 1.5;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Screen Textures */
+    body:before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.035;
+      background: repeating-linear-gradient(0deg, transparent 0 2px, #fff 3px 3px);
+    }
+    body:after {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9997;
+      background: radial-gradient(circle at 50% 20%, transparent 40%, rgba(0,0,0,0.75) 100%);
+    }
+
+    ::selection { background: var(--red); color: #fff; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: transparent; color: inherit; }
+
+    /* Nav Bar */
+    header {
+      position: sticky; top: 0; z-index: 5000;
+      background: var(--bg-panel); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4%;
+    }
+    .nav-left { display: flex; align-items: center; gap: 2rem; }
+    .logo {
+      font-weight: 900; font-size: 1.05rem; letter-spacing: 2px;
+      color: var(--white); display: flex; align-items: center; gap: 8px;
+    }
+    .logo-badge {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 700;
+      padding: 2px 5px; border-radius: 3px; background: var(--red-dim);
+      border: 1px solid var(--border-red); color: var(--red);
+    }
+    nav.desktop-nav { display: flex; gap: 1.2rem; }
+    nav.desktop-nav a {
+      font-family: var(--mono); font-size: 0.75rem; font-weight: 700;
+      color: var(--muted); letter-spacing: 0.5px; transition: color 0.2s;
+    }
+    nav.desktop-nav a:hover, nav.desktop-nav a.active { color: var(--white); }
+    .nav-tools { display: flex; align-items: center; gap: 0.8rem; }
+    .sys-pill {
+      font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .pulse-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+    .btn-icon {
+      border: 1px solid var(--border); border-radius: 4px; padding: 5px 8px;
+      font-family: var(--mono); font-size: 0.7rem; color: var(--text);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .btn-icon:hover { border-color: var(--muted); background: rgba(255,255,255,0.03); }
+
+    /* Layout Containers */
+    .container { max-width: 1380px; margin: 0 auto; padding: 4rem 4%; }
+    .section-head { margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: flex-end; }
+    .kicker { font-family: var(--mono); font-size: 0.72rem; color: var(--red); letter-spacing: 1.5px; margin-bottom: 0.4rem; font-weight: 700; }
+    .title-large { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.04em; color: var(--white); }
+    .subtitle { color: var(--muted); font-size: 0.88rem; max-width: 500px; }
+
+    /* Hero */
+    .hero {
+      padding: 6rem 4% 4rem; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: center;
+    }
+    .hero-pre { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 1rem; }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 900; line-height: 0.95;
+      letter-spacing: -0.06em; color: var(--white); margin-bottom: 1.5rem;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero-lead { font-size: 1.05rem; color: var(--muted); max-width: 620px; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 1.4rem; font-size: 0.82rem; font-family: var(--mono); font-weight: 700;
+      border-radius: 4px; border: 1px solid var(--border); transition: 0.2s;
+    }
+    .btn-red { background: var(--red); color: #fff; border-color: var(--red); }
+    .btn-red:hover { box-shadow: 0 0 20px rgba(255, 36, 79, 0.45); }
+    .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.03); }
+
+    .telemetry-card {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.4rem; font-family: var(--mono); font-size: 0.75rem;
+    }
+    .telemetry-card .t-head {
+      padding-bottom: 0.8rem; border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem; color: var(--muted); display: flex; justify-content: space-between;
+    }
+    .telemetry-row { display: flex; justify-content: space-between; padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .telemetry-row span:last-child { color: var(--white); font-weight: 700; }
+
+    /* Overview Dashboard */
+    .dashboard-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;
+      margin-bottom: 4rem;
+    }
+    .metric-card {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.2rem; position: relative;
+    }
+    .metric-title { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .metric-val { font-size: 1.6rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
+    .progress-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--red); }
+
+    /* Manifesto */
+    .manifesto-box {
+      border: 1px solid var(--border-strong); background: var(--bg-panel); border-radius: var(--radius);
+      padding: 3.5rem; margin-bottom: 4rem; position: relative;
+    }
+    .manifesto-stamp {
+      position: absolute; right: 2rem; top: 2rem; border: 2px solid var(--red); color: var(--red);
+      font-family: var(--mono); font-size: 0.75rem; font-weight: 900; padding: 4px 10px;
+      transform: rotate(4deg); letter-spacing: 2px;
+    }
+    .manifesto-quote { font-family: var(--serif); font-size: clamp(1.4rem, 2.8vw, 2.2rem); color: var(--white); margin-bottom: 1.5rem; line-height: 1.2; }
+    .manifesto-body { color: var(--text); font-size: 0.95rem; line-height: 1.7; max-width: 860px; margin-bottom: 1.5rem; }
+    .redacted { background: #1e293b; color: transparent; user-select: all; padding: 0 4px; border-radius: 2px; cursor: pointer; }
+    .redacted:hover { background: transparent; color: var(--red); }
+
+    /* Curriculum Engine */
+    .curriculum-layout { display: grid; grid-template-columns: 320px 1fr; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .curriculum-sidebar { background: var(--bg-panel-solid); border-right: 1px solid var(--border); }
+    .curriculum-list button {
+      width: 100%; padding: 0.85rem 1.2rem; text-align: left; display: block;
+      font-family: var(--mono); font-size: 0.75rem; border-bottom: 1px solid var(--border);
+      color: var(--muted); transition: 0.15s;
+    }
+    .curriculum-list button:hover, .curriculum-list button.active {
+      background: rgba(255,255,255,0.03); color: var(--white); border-left: 3px solid var(--red);
+    }
+    .curriculum-dossier { padding: 2rem; background: var(--bg-panel); }
+    .dossier-meta { display: flex; gap: 1rem; margin-bottom: 1rem; font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+    .dossier-tabs { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .dossier-tabs button {
+      padding: 0.5rem 1rem; font-family: var(--mono); font-size: 0.75rem; color: var(--muted);
+      border-bottom: 2px solid transparent;
+    }
+    .dossier-tabs button.active { color: var(--white); border-bottom-color: var(--red); }
+
+    /* Holy Split Schedule */
+    .split-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem; }
+    .day-card {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.2rem; cursor: pointer; transition: 0.2s;
+    }
+    .day-card:hover, .day-card.active { border-color: var(--red); transform: translateY(-2px); }
+    .day-code { font-family: var(--mono); font-size: 0.65rem; color: var(--red); font-weight: 700; margin-bottom: 0.5rem; }
+    .day-name { font-size: 1.05rem; font-weight: 800; color: var(--white); margin-bottom: 0.8rem; }
+    .day-load { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .day-status { font-family: var(--mono); font-size: 0.62rem; color: var(--green); border: 1px solid rgba(0,255,136,0.2); padding: 2px 4px; display: inline-block; }
+
+    /* JBG Command Console */
+    .jbg-console {
+      background: #010204; border: 1px solid var(--border-red); border-radius: var(--radius);
+      padding: 2.5rem; display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem;
+    }
+    .jbg-stat-box { font-family: var(--mono); }
+    .jbg-big-status { font-size: 2.2rem; font-weight: 900; color: var(--red); letter-spacing: -1px; margin-bottom: 1rem; }
+    .jbg-log {
+      height: 180px; overflow-y: auto; background: rgba(0,0,0,0.6); border: 1px solid var(--border);
+      padding: 1rem; font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+    }
+
+    /* Stench Dashboard */
+    .stench-console {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 2rem; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2.5rem;
+    }
+    .fuel-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; margin-top: 1rem; }
+    .fuel-item {
+      border: 1px solid var(--border); padding: 0.75rem; border-radius: 4px;
+      font-family: var(--mono); font-size: 0.7rem; background: rgba(0,0,0,0.3);
+    }
+    .fuel-item span { display: block; color: var(--green); font-weight: 700; margin-top: 0.2rem; }
+
+    /* Archive Grid */
+    .archive-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .archive-card {
+      border: 1px dashed var(--border); background: var(--bg-panel); border-radius: var(--radius);
+      padding: 1.4rem; position: relative; cursor: pointer; transition: 0.2s;
+    }
+    .archive-card:hover { border-color: var(--red); border-style: solid; }
+    .archive-stamp {
+      position: absolute; right: 1rem; top: 1rem; font-family: var(--mono); font-size: 0.58rem;
+      border: 1px solid var(--border); padding: 2px 4px; color: var(--muted);
+    }
+    .doc-preview-slot {
+      height: 120px; border: 1px solid rgba(255,255,255,0.04); background: #000;
+      margin: 1rem 0; display: grid; place-items: center; font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+    }
+
+    /* Interactive Terminal */
+    .terminal-window {
+      background: #010204; border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; font-family: var(--mono);
+    }
+    .terminal-bar {
+      background: #0a0d14; padding: 8px 14px; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--muted);
+    }
+    .terminal-content { padding: 1.2rem; height: 320px; overflow-y: auto; font-size: 0.78rem; line-height: 1.8; color: #94a3b8; }
+    .terminal-input-row { display: flex; align-items: center; padding: 8px 14px; border-top: 1px solid var(--border); background: #040609; }
+    .terminal-input-row span { color: var(--green); margin-right: 8px; font-weight: 700; }
+    .terminal-input-row input {
+      flex: 1; background: transparent; border: none; outline: none; color: #fff; font-family: var(--mono); font-size: 0.78rem;
+    }
+
+    /* Modals & Command Palette */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      z-index: 10000; display: none; place-items: center; padding: 20px;
+    }
+    .modal-overlay.active { display: grid; }
+    .modal-box {
+      background: var(--bg-panel-solid); border: 1px solid var(--border-strong); border-radius: var(--radius);
+      max-width: 650px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative;
+    }
+    .cmd-palette { max-width: 600px; padding: 0; }
+    .cmd-input-wrap { display: flex; border-bottom: 1px solid var(--border); padding: 1rem; }
+    .cmd-input-wrap input {
+      flex: 1; background: transparent; border: none; outline: none; font-family: var(--mono);
+      font-size: 0.95rem; color: #fff;
+    }
+    .cmd-list { max-height: 320px; overflow-y: auto; padding: 0.5rem; }
+    .cmd-item {
+      padding: 0.7rem 1rem; font-family: var(--mono); font-size: 0.75rem; border-radius: 4px;
+      display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+    }
+    .cmd-item:hover, .cmd-item.selected { background: rgba(255,255,255,0.04); color: var(--white); }
+
+    /* Notification Center */
+    #notifCenter {
+      position: fixed; bottom: 20px; right: 20px; z-index: 10001; display: flex; flex-direction: column; gap: 8px;
+    }
+    .notif {
+      background: #090c12; border: 1px solid var(--border); border-left: 3px solid var(--red);
+      padding: 10px 16px; border-radius: 4px; font-family: var(--mono); font-size: 0.72rem;
+      color: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.8); animation: slideIn 0.2s ease-out;
+    }
+    @keyframes slideIn { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    /* Settings Drawer */
+    .drawer {
+      position: fixed; top: 0; right: -380px; width: 360px; height: 100vh;
+      background: var(--bg-panel-solid); border-left: 1px solid var(--border);
+      z-index: 9999; padding: 2rem; transition: right 0.3s;
+    }
+    .drawer.active { right: 0; }
+    .drawer-row { display: flex; justify-content: space-between; align-items: center; margin: 1.2rem 0; font-family: var(--mono); font-size: 0.75rem; }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 4rem 4% 3rem; background: #020305;
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+    }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .curriculum-layout { grid-template-columns: 1fr; }
+      .curriculum-sidebar { max-height: 200px; overflow-y: auto; }
+      .jbg-console, .stench-console { grid-template-columns: 1fr; }
+      nav.desktop-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <div class="nav-left">
+      <div class="logo" id="logoClick" title="BP Club Central Subsystem">
+        <span class="logo-badge">SYS:07</span> BP CLUB™
+      </div>
+      <nav class="desktop-nav">
+        <a href="#overview">OVERVIEW</a>
+        <a href="#curriculum">CURRICULUM</a>
+        <a href="#split">STRENGTH</a>
+        <a href="#jbg">JBG</a>
+        <a href="#hypergamy">ANALYTICS</a>
+        <a href="#archive">ARCHIVE</a>
+        <a href="#stench">STENCHMAXX</a>
+        <a href="#terminal">TERMINAL</a>
+      </nav>
+    </div>
+    <div class="nav-tools">
+      <div class="sys-pill"><div class="pulse-dot"></div><span id="timeDisplay">00:00:00 UTC</span></div>
+      <button class="btn-icon" onclick="openCmd()"><span style="color:var(--red);">⌘</span> <span class="hide-mobile">CTRL+K</span></button>
+      <button class="btn-icon" onclick="toggleDrawer()">CONFIG</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="overview">
+    <div>
+      <div class="hero-pre">ARCHIVE CODE: BP-2026-HQ // CLEARANCE: CHADLITE // STRICTLY EMBARGOED</div>
+      <h1>DISCIPLINE BUILDS FREEDOM. <span>LOOKS BUILD REALITY.</span></h1>
+      <p class="hero-lead">The definitive defense-grade institutional dossier for mandibular force distribution, hypergamic analytics, and kinetic neuromuscular dominance. Uncompromising structural alignment disguised as corporate standard.</p>
+      <div class="hero-actions">
+        <a href="#curriculum" class="btn btn-red">ENTER CURRICULUM</a>
+        <a href="#archive" class="btn btn-ghost">ACCESS ARCHIVES</a>
+        <button class="btn btn-ghost" onclick="reqJBG()">REQUEST JBG VERDICT</button>
+      </div>
+    </div>
+    <div class="telemetry-card">
+      <div class="t-head"><span>ACTIVE TELEMETRY</span><span>NODE: MN-TC-09</span></div>
+      <div class="telemetry-row"><span>SYSTEM STATUS</span><span style="color:var(--green)">OPERATIONAL</span></div>
+      <div class="telemetry-row"><span>OIL LEVEL</span><span style="color:var(--gold)" id="heroOil">SCAN REQUIRED</span></div>
+      <div class="telemetry-row"><span>HEXUM RATIO</span><span>0.618 OPTIMAL</span></div>
+      <div class="telemetry-row"><span>BICEP / BACKSHOT RATIO</span><span>3.4:1 FAILURE</span></div>
+      <div class="telemetry-row"><span>COPE INDEX</span><span style="color:var(--red)">0.00% TOLERANCE</span></div>
+      <button class="btn btn-red" style="width:100%; margin-top:1rem; font-size:0.7rem;" onclick="triggerOilTest()">RUN BIO-DIAGNOSTIC</button>
+    </div>
+  </section>
+
+  <!-- DASHBOARD OVERVIEW -->
+  <section class="container" style="padding-top:2rem; padding-bottom:1rem;">
+    <div class="dashboard-grid">
+      <div class="metric-card">
+        <div class="metric-title">BP Integrity Ratio</div>
+        <div class="metric-val" id="valInteg">99.4%</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 99.4%;"></div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Grease Index</div>
+        <div class="metric-val" id="valGrease">84.2</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 84.2%; background: var(--gold);"></div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Brotha Density</div>
+        <div class="metric-val">100%</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 100%; background: var(--green);"></div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">JBG Directives Executed</div>
+        <div class="metric-val">1,402</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 72%;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="container">
+    <div class="manifesto-box">
+      <div class="manifesto-stamp">PRINT 2X</div>
+      <div class="manifesto-quote">“BETTER BROS. BIGGER DREAMS. ZERO DEVIATION FROM THE CRANIOFACIAL NORM.”</div>
+      <p class="manifesto-body">
+        The paradigm shifts not by dialogue, but through irreversible clavicular expansion and deliberate postural recalibration. All modern kinetic failures stem directly from insufficient lingual roof pressure and ignorance of the <span class="redacted" title="Click to reveal">JBG Bruuuutalll Framework</span>. We mandate a return to absolute baseline rigidity. Confidence is not an internal feeling—it is the direct arithmetic byproduct of the <span class="redacted" title="Click to reveal">Strength Pill</span> and Friday Evil protocol execution. Check your baseline, remain completely greasy, and execute without hesitation.
+      </p>
+      <div style="font-family:var(--mono); font-size:0.65rem; color:var(--muted);">
+        REF: SEC-DOC-004-REV2 // AUTHORIZED BY CENTRAL EXECUTIVE JBG // UNCLASSIFIED UPON DRILL COMPLETION
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRICULUM DATABASE -->
+  <section class="container" id="curriculum">
+    <div class="section-head">
+      <div>
+        <div class="kicker">// EXPANDED INSTRUCTIONAL ENGINE</div>
+        <div class="title-large">CURRICULUM DATABASE</div>
+      </div>
+      <div class="subtitle">13 Comprehensive technical modules. Non-reloading dossier architecture.</div>
+    </div>
+
+    <div class="curriculum-layout">
+      <div class="curriculum-sidebar">
+        <div class="curriculum-list" id="moduleNav">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+      <div class="curriculum-dossier" id="dossierBody">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- HOLY STRENGTH SPLIT -->
+  <section class="container" id="split">
+    <div class="section-head">
+      <div>
+        <div class="kicker">// MICRO-CYCLE TRAINING TIMELINE</div>
+        <div class="title-large">THE HOLY STRENGTH SPLIT</div>
+      </div>
+      <div class="subtitle">Strict 3-5 minute rest intervals. Train to technical collapse. No compensatory rest.</div>
+    </div>
+
+    <div class="split-grid" id="splitGrid">
+      <!-- Populated via JS -->
+    </div>
+
+    <div id="splitDetail" style="margin-top:1.5rem; background:var(--bg-panel); border:1px solid var(--border); padding:1.5rem; border-radius:var(--radius);">
+      <div style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-bottom:0.4rem;">INSPECTION PROTOCOL</div>
+      <div id="splitDetailTitle" style="font-size:1.15rem; font-weight:800; color:var(--white); margin-bottom:0.4rem;">SELECT A TRAINING CYCLE TO INSPECT BIOMECHANICAL DETAILS</div>
+      <div id="splitDetailText" style="font-size:0.85rem; color:var(--text);">Click any split microcycle above to populate complete mechanical vectors and safety disclaimers.</div>
+    </div>
+  </section>
+
+  <!-- JBG COMMAND -->
+  <section class="container" id="jbg">
+    <div class="section-head">
+      <div>
+        <div class="kicker">// JURISPRUDENCE & VERDICTS</div>
+        <div class="title-large">JBG CENTRAL COMMAND</div>
+      </div>
+      <div class="subtitle">JBG IS LAW. Centralized authority governing all physical and theoretical posturing.</div>
+    </div>
+
+    <div class="jbg-console">
+      <div class="jbg-stat-box">
+        <div class="jbg-big-status">STATUS: ACTIVE</div>
+        <p style="font-size:0.85rem; color:var(--text); margin-bottom:1.5rem;">
+          The Central JBG Review Board issues binding verdicts across all aesthetic and athletic endeavors. Decisions carry zero right of appeal.
+        </p>
+        <button class="btn btn-red" onclick="reqJBG()">SUBMIT FORMAL INQUIRY</button>
+      </div>
+      <div>
+        <div style="font-family:var(--mono); font-size:0.68rem; color:var(--muted); margin-bottom:0.4rem;">LIVE JBG AUDIT TRAIL</div>
+        <div class="jbg-log" id="jbgLog">
+          <div>[14:02:11] JBG REVIEW: Clavicular width verified within 0.05% margin. PASS.</div>
+          <div>[14:01:05] JBG WARNING: Unauthorized cardio session detected. REVOKED.</div>
+          <div>[13:58:22] JBG MANDATE: Friday Evil session schedule locked globally.</div>
+          <div>[13:50:00] JBG VERDICT: Request #8892 approved without comment.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HYPERGAMY ANALYTICS -->
+  <section class="container" id="hypergamy">
+    <div class="section-head">
+      <div>
+        <div class="kicker">// STATISTICAL ASYMMETRY</div>
+        <div class="title-large">HYPERGAMY RESEARCH ENGINE</div>
+      </div>
+      <div class="subtitle">Mathematical disparity evaluation. Simulated distribution models vs real-world cope.</div>
+    </div>
+
+    <div style="background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:2rem;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:2rem;">
+        <div>
+          <div style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-bottom:0.8rem;">BS 25 DETECTOR // THEORETICAL SKEW</div>
+          <div style="display:flex; height:180px; align-items:flex-end; gap:8px; border-bottom:1px solid var(--border); padding-bottom:8px;">
+            <div style="flex:1; background:var(--red); height:90%; border-radius:2px 2px 0 0;" title="Top 5% Distribution"></div>
+            <div style="flex:1; background:rgba(255,36,79,0.4); height:45%;" title="20% Bracket"></div>
+            <div style="flex:1; background:rgba(255,255,255,0.08); height:20%;" title="Median Bracket"></div>
+            <div style="flex:1; background:rgba(255,255,255,0.03); height:8%;" title="Cope Baseline"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-family:var(--mono); font-size:0.65rem; color:var(--muted); margin-top:6px;">
+            <span>CHADLITE</span><span>PSL 6.5+</span><span>APPEAL</span><span>JFL</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-bottom:0.8rem;">REALITY TOLERANCE COEFFICIENT</div>
+          <p style="font-size:0.85rem; color:var(--text); line-height:1.6; margin-bottom:1rem;">
+            Comparative analysis validates that social appeal and raw geometric metrics (PSL) diverge significantly in chaotic social environments. The model verifies that without systematic fraudmaxxing or height enhancement, statistical conversion approaches asymptotic collapse.
+          </p>
+          <div style="font-family:var(--mono); font-size:0.72rem; color:var(--gold);">
+            WARNING: Fictional analytical model. For satirical institutional research only.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STENCHMAXX -->
+  <section class="container" id="stench">
+    <div class="section-head">
+      <div>
+        <div class="kicker">// BIOCHEMICAL METRIC MONITORING</div>
+        <div class="title-large">HOLY STENCH PROTOCOL</div>
+      </div>
+      <div class="subtitle">Nutritional bio-fuels designed for unholy atmospheric displacement.</div>
+    </div>
+
+    <div class="stench-console">
+      <div>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--green); font-weight:700;">ATMOSPHERIC SATURATION: BROOTALLL</div>
+        <p style="font-size:0.85rem; color:var(--text); margin-top:0.4rem;">
+          Mandatory nutritional baseline optimized for high-yield digestive pressure and biological air dominance.
+        </p>
+        <div class="fuel-matrix">
+          <div class="fuel-item">FUEL 01<span>EGG YOLK</span></div>
+          <div class="fuel-item">FUEL 02<span>BLACK BEANS</span></div>
+          <div class="fuel-item">FUEL 03<span>AVOCADO</span></div>
+          <div class="fuel-item">FUEL 04<span>STEAK</span></div>
+          <div class="fuel-item">FUEL 05<span>BROCCOLI</span></div>
+        </div>
+      </div>
+      <div style="border-left:1px solid var(--border); padding-left:2rem; font-family:var(--mono);">
+        <div style="font-size:0.7rem; color:var(--muted);">CONTAINMENT SYSTEM STATUS</div>
+        <div style="font-size:1.8rem; font-weight:800; color:var(--gold); margin:0.5rem 0;" id="stenchReadout">NORMAL</div>
+        <button class="btn btn-red" style="font-size:0.7rem; width:100%;" onclick="ventStench()">VENT GASEOUS PLUME</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section class="container" id="archive">
+    <div class="section-head">
+      <div>
+        <div class="kicker">// DECLASSIFIED DOSSIERS</div>
+        <div class="title-large">CLASSIFIED ARCHIVE</div>
+      </div>
+      <div class="subtitle">Complete catalog of source directives and research posters[cite: 1].</div>
+    </div>
+
+    <div class="archive-controls">
+      <div style="display:flex; gap:6px;">
+        <button class="btn btn-ghost" style="font-size:0.7rem;" onclick="filterArchive('all')">ALL (07)</button>
+        <button class="btn btn-ghost" style="font-size:0.7rem;" onclick="filterArchive('doctrine')">DOCTRINE</button>
+        <button class="btn btn-ghost" style="font-size:0.7rem;" onclick="filterArchive('tactical')">TACTICAL</button>
+      </div>
+      <div style="font-family:var(--mono); font-size:0.7rem; color:var(--muted);">FORMAT: RAW SCANS</div>
+    </div>
+
+    <div class="archive-grid" id="archiveGrid">
+      <!-- Populated via JS -->
+    </div>
+  </section>
+
+  <!-- INTERACTIVE TERMINAL -->
+  <section class="container" id="terminal">
+    <div class="section-head">
+      <div>
+        <div class="kicker">// LOW-LEVEL MAINFRAME ACCESS</div>
+        <div class="title-large">MAINFRAME TERMINAL</div>
+      </div>
+      <div class="subtitle">Execute root-level directives. Type <span style="color:var(--white);">help</span> for instructions.</div>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-bar">
+        <span>guest@bp-mainframe-node-07: ~</span>
+        <span>SYS_OK // 256-BIT</span>
+      </div>
+      <div class="terminal-content" id="termOutput">
+        <div>BP CLUB OS [Version 2.4.9-STABLE]</div>
+        <div>(c) 2026 BP Defense Network. All parameters strictly enforced.</div>
+        <div>Type <span style="color:var(--green)">help</span> to list operational commands.</div>
+        <br>
+      </div>
+      <div class="terminal-input-row">
+        <span>&gt;</span>
+        <input type="text" id="termInput" autocomplete="off" spellcheck="false" placeholder="Enter command...">
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div style="font-weight:900; color:var(--white); margin-bottom:0.8rem;">BP CLUB™ INTERNATIONAL</div>
+        <div>BETTER BROS. BIGGER DREAMS.</div>
+        <div>DISCIPLINE BUILDS FREEDOM.</div>
+      </div>
+      <div>
+        <div style="color:var(--white); margin-bottom:0.8rem;">SECURITY CLEARANCE</div>
+        <div>NODE: SECURE 07</div>
+        <div>STATUS: EMBARGOED</div>
+        <div>JBG SEAL: CONFIRMED</div>
+      </div>
+      <div>
+        <div style="color:var(--white); margin-bottom:0.8rem;">PARODY JURISPRUDENCE</div>
+        <div>Strictly fictional satirical project. None of the listed exercises or diets represent clinical or health recommendations.</div>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:1.5rem;">
+      <span>© 2026 BP CLUB NETWORK. ALL RIGHTS RESERVED.</span>
+      <span style="cursor:pointer;" id="secretFooterEgg">CHECK YOUR OIL. STAY GREASY.</span>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="cmdModal">
+    <div class="modal-box cmd-palette">
+      <div class="cmd-input-wrap">
+        <input type="text" id="cmdSearch" placeholder="Type a command or jump to section (/help, /jbg, /oil)...">
+      </div>
+      <div class="cmd-list" id="cmdResults"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="docModal">
+    <div class="modal-box" style="padding:2rem;">
+      <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border); padding-bottom:1rem; margin-bottom:1rem;">
+        <div style="font-family:var(--mono); font-size:0.8rem; font-weight:700;" id="docModalTitle">DOSSIER VIEW</div>
+        <button onclick="closeModals()" style="font-family:var(--mono);">[ESC / CLOSE]</button>
+      </div>
+      <div id="docModalBody" style="font-size:0.85rem; line-height:1.7; color:var(--text);"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS DRAWER -->
+  <div class="drawer" id="settingsDrawer">
+    <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border); padding-bottom:1rem; margin-bottom:1rem;">
+      <div style="font-family:var(--mono); font-weight:700;">SYSTEM PREFERENCES</div>
+      <button onclick="toggleDrawer()" style="font-family:var(--mono);">✕</button>
+    </div>
+    <div class="drawer-row">
+      <span>CRT Scanlines</span>
+      <input type="checkbox" id="cfgScan" checked onchange="updateCfg()">
+    </div>
+    <div class="drawer-row">
+      <span>Background Grid</span>
+      <input type="checkbox" id="cfgGrid" checked onchange="updateCfg()">
+    </div>
+    <div class="drawer-row">
+      <span>High Contrast</span>
+      <input type="checkbox" id="cfgContrast" onchange="updateCfg()">
+    </div>
+    <div class="drawer-row">
+      <span>Information Density</span>
+      <select id="cfgDensity" onchange="updateCfg()" style="background:#000; color:#fff; border:1px solid var(--border); font-family:var(--mono); font-size:0.7rem; padding:2px 4px;">
+        <option value="standard">Standard</option>
+        <option value="compact">Compact</option>
+        <option value="archive">Archive</option>
+      </select>
+    </div>
+    <div class="drawer-row" style="margin-top:2rem;">
+      <button class="btn btn-red" style="width:100%; font-size:0.7rem;" onclick="resetLocalStorage()">PURGE LOCAL CACHE</button>
+    </div>
+  </div>
+
+  <!-- NOTIFICATIONS -->
+  <div id="notifCenter"></div>
+
+  <!-- ENGINE SCRIPT -->
+  <script>
+    // State Persistence
+    const state = {
+      favorites: JSON.parse(localStorage.getItem('bp_favs') || '[]'),
+      settings: JSON.parse(localStorage.getItem('bp_cfg') || '{"scan":true,"grid":true,"contrast":false,"density":"standard"}'),
+      eggs: JSON.parse(localStorage.getItem('bp_eggs') || '[]')
+    };
+
+    function notify(msg) {
+      const c = document.getElementById('notifCenter');
+      const d = document.createElement('div');
+      d.className = 'notif';
+      d.innerText = msg;
+      c.appendChild(d);
+      setTimeout(() => { d.remove(); }, 3400);
+    }
+
+    // Curriculum Data
+    const modules = [
+      { id: "M-01", cat: "FOUNDATION", title: "Mandibular Force Dynamics", diff: "CORE", status: "VERIFIED", comp: 100,
+        desc: "Proper maxilla and mandible elevation metrics. Correct lingual force vectors over backward tongue collapse[cite: 1]. Ensures continuous facial bone upward remodel.",
+        terms: ["MEW_VECTORS", "HEXUM_RATIO", "TONGUE_ROOF_LATCH"] },
+      { id: "M-02", cat: "LOOKSMAXX", title: "Clavicular Expansion Protocol", diff: "INTERMEDIATE", status: "ARMED", comp: 88,
+        desc: "Skeletal widening mechanics through heavy eccentric loads, scapular posture locking, and horizontal plane domination[cite: 1].",
+        terms: ["CLAV_EXPAND", "BIACROMIAL_SPREAD", "BONES_MASHING"] },
+      { id: "M-03", cat: "HEIGHTMAXX", title: "Masaai Kinetic Altitude", diff: "TACTICAL", status: "ACTIVE", comp: 62,
+        desc: "High-impact vertical ground-force absorption routines[cite: 1]. Focuses on micro-fracture remodeling and tendon stiffness calibration.",
+        terms: ["MASAAI_HOPS", "MUDHUT_PHYSIQ", "MICRO_FRACTURE"] },
+      { id: "M-04", cat: "FRAUDMAXX", title: "Angles, Shadow & Posture Decoupling", diff: "MANDATORY", status: "VERIFIED", comp: 94,
+        desc: "Acoustic and photometric manipulation to yield maximum presence in sub-optimal environments. Mastering non-linear appeal vectors[cite: 1].",
+        terms: ["LENS_WARPING", "AURA_DEFLECTION", "LIGHTING_EXPLOITS"] },
+      { id: "M-05", cat: "HYPERGAMYMAXX", title: "Asymmetric Match Matrix", diff: "ADVANCED", status: "EMBARGOED", comp: 45,
+        desc: "Statistical deconstruction of modern pairing dynamics. Analysis of pareto distributions across social networks[cite: 1].",
+        terms: ["BS_25_MAX", "HULLO_25", "JBG_FOUNDATION"] },
+      { id: "M-06", cat: "YADSTEPMAXX", title: "High-BPM Kinetic Acceleration", diff: "EXTREME", status: "LOCKED", comp: 10,
+        desc: "Neuromuscular adaptation under aggressive audio pressure (160+ BPM). Rhythmic sprint cycles and fast-twitch activation[cite: 1].",
+        terms: ["YADSTEP_BURST", "CENTRAL_NERVOUS_PUMP", "SONIC_FATIGUE"] },
+      { id: "M-07", cat: "HARDTEK / TEKNO", title: "Rhythmic Endurance Conditioning", diff: "INTENSE", status: "ACTIVE", comp: 76,
+        desc: "Cardiovascular and mental conditioning via uninterrupted repetitive industrial pulse environments[cite: 1].",
+        terms: ["TEKNO_PARTY", "ENDURANCE_CIRCUIT", "AURA_SUSTAIN"] },
+      { id: "M-08", cat: "DANCE WITH THE PANTS", title: "Fluid Kinetic Disruption", diff: "UNORTHODOX", status: "VERIFIED", comp: 100,
+        desc: "Dynamic lower-body mobility routines bypassing traditional hip abduction limitations[cite: 1]. Designed for psychological disruption.",
+        terms: ["PANTS_LESSONS", "HIP_THRUST_SWING", "PELVIC_CONTROL"] },
+      { id: "M-09", cat: "GOONMAXX", title: "Extreme Neurological Retention", diff: "CLASSIFIED", status: "EMBARGOED", comp: 30,
+        desc: "Dopaminergic regulation through strict high-test management and complete psychological discipline[cite: 1].",
+        terms: ["DOPAMINE_WALL", "TEST_RETENTION", "NEURAL_ISOLATION"] },
+      { id: "M-10", cat: "STACYLITE", title: "Targeted Counter-Match Acquisition", diff: "ANALYTIC", status: "VERIFIED", comp: 85,
+        desc: "Identifying high-tier relational compatibility vectors while bypassing mainstream social friction[cite: 1].",
+        terms: ["ETHNIC_STACYLITE", "APPEAL_ARBITRAGE", "PSL_PARITY"] },
+      { id: "M-11", cat: "PSL VS APPEAL", title: "Facial Geometry vs Dynamic Charisma", diff: "THEORETICAL", status: "VERIFIED", comp: 90,
+        desc: "Comparative metrics showing that pure mathematical bone symmetry without dynamic kinetic grease yields zero real-world leverage[cite: 1].",
+        terms: ["BONES_VS_GAME", "CANTHAL_TILT", "MAXILLA_HARMONY"] },
+      { id: "M-12", cat: "STRENGTH PILL", title: "Holy Confidence Reconstitution", diff: "CORE", status: "VERIFIED", comp: 100,
+        desc: "Complete psychological transformation through maximal mechanical strain[cite: 1]. Eradicates baseline cope and installs unwavering presence.",
+        terms: ["CONFIDENCE=JFL", "HOLY_CONFIDENCE", "BROOTALLL_PILL"] },
+      { id: "M-13", cat: "JBG", title: "The Absolute Juridical Standard", diff: "SUPREME", status: "PERMANENT", comp: 100,
+        desc: "The overarching theoretical doctrine dictating that JBG is law[cite: 1]. All progress is measured directly against JBG baseline parameters.",
+        terms: ["JBG_IS_LAW", "TRUE_HARDMAXX", "ZERO_APPEAL"] }
+    ];
+
+    let currentModule = 0;
+    function renderCurriculum() {
+      const nav = document.getElementById('moduleNav');
+      nav.innerHTML = modules.map((m, idx) => `
+        <button class="${idx === currentModule ? 'active' : ''}" onclick="selectModule(${idx})">
+          <span style="color:var(--red); margin-right:6px;">${m.id}</span> ${m.title}
+        </button>
+      `).join('');
+
+      const m = modules[currentModule];
+      const dossier = document.getElementById('dossierBody');
+      dossier.innerHTML = `
+        <div class="dossier-meta">
+          <span>CAT: ${m.cat}</span> // <span>DIFFICULTY: ${m.diff}</span> // <span style="color:var(--green);">STATUS: ${m.status}</span>
+        </div>
+        <h2 style="font-size:1.8rem; font-weight:800; color:var(--white); margin-bottom:1rem;">${m.title}</h2>
+        <div class="dossier-tabs">
+          <button class="active">OVERVIEW</button>
+          <button onclick="notify('RESTRICTED ACCESS: CLEARANCE CHADLITE REQUIRED')">TECHNICAL DOSSIER</button>
+          <button onclick="notify('ARCHIVE REFERENCE LINKED')">EVIDENCE</button>
+        </div>
+        <p style="font-size:0.92rem; color:var(--text); line-height:1.7; margin-bottom:1.5rem;">${m.desc}</p>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-bottom:0.6rem;">CORE IDENTIFIERS</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:2rem;">
+          ${m.terms.map(t => `<span style="border:1px solid var(--border); padding:3px 8px; border-radius:3px; font-family:var(--mono); font-size:0.7rem;">${t}</span>`).join('')}
+        </div>
+        <div style="display:flex; gap:1rem;">
+          <button class="btn btn-red" onclick="notify('COMPLETION STATUS LOGGED TO JBG NETWORK')">SIGN OFF MODULE (${m.comp}%)</button>
+          <button class="btn btn-ghost" onclick="toggleFav('${m.id}')">${state.favorites.includes(m.id) ? '★ IN WATCHLIST' : '☆ WATCHLIST'}</button>
+        </div>
+      `;
+    }
+
+    function selectModule(i) {
+      currentModule = i;
+      renderCurriculum();
+    }
+
+    function toggleFav(id) {
+      if(state.favorites.includes(id)) {
+        state.favorites = state.favorites.filter(x => x !== id);
+        notify("REMOVED FROM WATCHLIST");
+      } else {
+        state.favorites.push(id);
+        notify("DOSSIER PINNED TO WATCHLIST");
+      }
+      localStorage.setItem('bp_favs', JSON.stringify(state.favorites));
+      renderCurriculum();
+    }
+
+    // Split Schedule Data
+    const splitData = [
+      { day: "MON", title: "CHEST", load: "Left Arm & Tibialis Anterior", status: "LOCKED", detail: "Heavy unilateral tension focusing exclusively on left pectoral and anterior tibialis to counteract asymmetrical posture[cite: 1]." },
+      { day: "TUE", title: "BISEP / GLUTE", load: "Kegels & Deep Hip Thrusts", status: "ARMED", detail: "Pelvic torque generation and structural pelvic floor reinforcement[cite: 1]. Sustained contractions under maximal bar velocity." },
+      { day: "WED", title: "HEAD / SHOULDERS", load: "Knees & Toes Supersets", status: "CRITICAL", detail: "Nursery rhyme biomechanical continuum[cite: 1]. Rapid transition cycles pushing heart-rate beyond standard lactic threshold." },
+      { day: "THU", title: "KNEES & TOES", load: "Masaai Vertical Jump Kinetics", status: "VERTICAL", detail: "Pure terminal ground impact dissipation and high-frequency vertical spring training[cite: 1]." },
+      { day: "FRI", title: "EVIL WORKOUT", load: "Unregulated Chaos Execution", status: "DO NOT ASK", detail: "Non-standardized intensity routine[cite: 1]. Complete mental and physical structural transcendence. No logs permitted." },
+      { day: "SAT", title: "LEGS", load: "Biceps & Backshots Conditioning", status: "GREASY", detail: "High-volume hamstring and lower-lumbar extension superset[cite: 1]. Maximum grease quotient." },
+      { day: "SUN", title: "TOM PLATZ DAY", load: "System Restoration & Legs", status: "HOLY", detail: "Total quad destruction followed by complete quiet system reflection[cite: 1]. Holy confidence unlocked." }
+    ];
+
+    function renderSplit() {
+      const g = document.getElementById('splitGrid');
+      g.innerHTML = splitData.map((d, i) => `
+        <div class="day-card" onclick="selectSplit(${i})">
+          <div class="day-code">${d.day} // CYCLE 0${i+1}</div>
+          <div class="day-name">${d.title}</div>
+          <div class="day-load">${d.load}</div>
+          <div class="day-status">${d.status}</div>
+        </div>
+      `).join('');
+    }
+
+    function selectSplit(i) {
+      const d = splitData[i];
+      document.getElementById('splitDetailTitle').innerText = `${d.day} // ${d.title} [${d.load}]`;
+      document.getElementById('splitDetailText').innerText = d.detail;
+      notify(`CYCLE ${d.day} INSPECTION LOADED`);
+    }
+
+    // Archive Data
+    const archives = [
+      { id: "BP-001", page: "01", cat: "doctrine", title: "Welcome to BP Club Brotha", desc: "Foundational charter outlining the Chadlite transition, PSL vs Appeal, and Hardtek parties[cite: 1]." },
+      { id: "BP-002", page: "02", cat: "tactical", title: "Holy Split & Strength Pill", desc: "The original weekly schedule matrix including Friday Evil and Sunday Platz restoration[cite: 1]." },
+      { id: "BP-003", page: "03", cat: "doctrine", title: "Bigger Minds, Higher Standards", desc: "Clavicular doctrine, Hexum ratios, and the legendary Dance with the Pants curriculum[cite: 1]." },
+      { id: "BP-004", page: "04", cat: "tactical", title: "BP Maxxing & Bone Mashing", desc: "Strict skull remodeling notes, Mewing vectors, and hammer protocols[cite: 1]." },
+      { id: "BP-005", page: "05", cat: "doctrine", title: "JBG Is Law & True Hardmaxx", desc: "Detailed hypergamy distribution charts and absolute confirmation that JBG is permanent law[cite: 1]." },
+      { id: "BP-006", page: "06", cat: "tactical", title: "Holy Height & Masaai Architecture", desc: "Teepee and mudhut biomechanical drills designed for extreme endogenous test spikes[cite: 1]." },
+      { id: "BP-007", page: "07", cat: "tactical", title: "Holy Stench Protocol", desc: "The five-element biological combustion catalog: Egg Yolk, Black Beans, Avocado, Steak, Broccoli[cite: 1]." }
+    ];
+
+    function renderArchive(list) {
+      const g = document.getElementById('archiveGrid');
+      g.innerHTML = list.map(a => `
+        <div class="archive-card" onclick="openDoc('${a.id}')">
+          <div class="archive-stamp">${a.id}</div>
+          <div style="font-family:var(--mono); font-size:0.65rem; color:var(--red);">PAGE ${a.page} // ${a.cat.toUpperCase()}</div>
+          <div style="font-size:1.1rem; font-weight:800; color:var(--white); margin:0.4rem 0;">${a.title}</div>
+          <div class="doc-preview-slot">[CLASSIFIED SCAN SLOT]</div>
+          <div style="font-size:0.75rem; color:var(--muted);">${a.desc}</div>
+        </div>
+      `).join('');
+    }
+
+    function filterArchive(c) {
+      if(c === 'all') renderArchive(archives);
+      else renderArchive(archives.filter(a => a.cat === c));
+    }
+
+    function openDoc(id) {
+      const a = archives.find(x => x.id === id);
+      if(!a) return;
+      document.getElementById('docModalTitle').innerText = `${a.id} // ${a.title}`;
+      document.getElementById('docModalBody').innerHTML = `
+        <p style="margin-bottom:1rem;"><strong>ARCHIVE STATUS:</strong> OFFICIAL DEFENSE SPECIFICATION</p>
+        <p style="margin-bottom:1rem;">${a.desc}</p>
+        <div style="background:#000; border:1px solid var(--border); padding:2rem; text-align:center; font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-bottom:1rem;">
+          [HIGH RESOLUTION SCAN PLACEHOLDER: PRESERVED ORIGINAL ARTIFACT]
+        </div>
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--muted);">METADATA: CONFIRMED PRESERVED WORDING. ZERO OMISSIONS DETECTED.</p>
+      `;
+      document.getElementById('docModal').classList.add('active');
+    }
+
+    function closeModals() {
+      document.getElementById('docModal').classList.remove('active');
+      document.getElementById('cmdModal').classList.remove('active');
+    }
+
+    // Terminal Engine
+    const termIn = document.getElementById('termInput');
+    const termOut = document.getElementById('termOutput');
+
+    const commands = {
+      help: () => "AVAILABLE COMMANDS: help, status, archive, jbg, oil, stench, split, curriculum, whoami, clear, brotha, classified",
+      status: () => "NETWORK: ONLINE // NODE: BP-07 // INTEGRITY: 99.4% // OIL: CHECK MANDATED",
+      archive: () => "7 ARCHIVES LOADED. BP-001 TO BP-007 ACCESSIBLE.",
+      jbg: () => "JBG IS LAW. STATUS: UNCONTESTED. ALL DECISIONS FINAL.",
+      oil: () => "RUNNING VISCOSITY SENSORS... VERDICT: 100% GREASY. STAY DRIED IN.",
+      stench: () => "CATALYSTS: EGG YOLK, BLACK BEANS, AVOCADO, STEAK, BROCCOLI. GASEOUS PLUME NORMAL.",
+      split: () => "MON: CHEST // TUE: GLUTE // WED: HEAD/TOES // THU: TOES // FRI: EVIL // SAT: LEGS // SUN: PLATZ",
+      curriculum: () => "13 MODULES REGISTERED. USE UI DATABASE FOR INTERACTIVE SESSIONS.",
+      whoami: () => "CLEARANCE LEVEL: CHADLITE // PRIVILEGES: RESTRICTED TERMINAL",
+      clear: () => { termOut.innerHTML = ""; return ""; },
+      brotha: () => { document.body.classList.toggle('brotha-mode'); return "BROTHA MODE TOGGLED."; },
+      classified: () => "RAW DOSSIER: JBG BRUUUTALLL // MASAAI BONE DRILLS // GOONMAXX SUSTAINED."
+    };
+
+    termIn.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') {
+        const raw = termIn.value.trim().toLowerCase();
+        termIn.value = '';
+        if(!raw) return;
+        termOut.innerHTML += `<div><span style="color:var(--green)">guest@bp-mainframe:~$</span> ${raw}</div>`;
+        if(commands[raw]) {
+          const res = commands[raw]();
+          if(res) termOut.innerHTML += `<div>${res}</div>`;
+        } else {
+          termOut.innerHTML += `<div style="color:var(--red)">Command not recognized: '${raw}'. Type 'help'.</div>`;
+        }
+        termOut.scrollTop = termOut.scrollHeight;
+      }
+    });
+
+    // Command Palette Search
+    const cmdInput = document.getElementById('cmdSearch');
+    const cmdList = document.getElementById('cmdResults');
+
+    const searchPool = [
+      { name: "Curriculum: Mandibular Force", cmd: () => { selectModule(0); location.href = "#curriculum"; } },
+      { name: "Curriculum: Clavicular Widening", cmd: () => { selectModule(1); location.href = "#curriculum"; } },
+      { name: "Holy Split: Friday Evil Workout", cmd: () => { selectSplit(4); location.href = "#split"; } },
+      { name: "Holy Split: Sunday Tom Platz Day", cmd: () => { selectSplit(6); location.href = "#split"; } },
+      { name: "Execute Oil Diagnostic", cmd: () => triggerOilTest() },
+      { name: "JBG Central Verdict", cmd: () => reqJBG() },
+      { name: "Nutrition: Holy Stench Protocol", cmd: () => { location.href = "#stench"; } },
+      { name: "Toggle Brotha Mode", cmd: () => { document.body.classList.toggle('brotha-mode'); notify('BROTHA MODE TOGGLED'); } },
+      { name: "System Settings", cmd: () => toggleDrawer() }
+    ];
+
+    function openCmd() {
+      document.getElementById('cmdModal').classList.add('active');
+      cmdInput.value = "";
+      renderCmdResults(searchPool);
+      setTimeout(() => cmdInput.focus(), 50);
+    }
+
+    function renderCmdResults(items) {
+      cmdList.innerHTML = items.map((x, i) => `
+        <div class="cmd-item" onclick="runCmdItem(${i})">
+          <span>${x.name}</span>
+          <span style="color:var(--muted); font-size:0.65rem;">EXECUTE</span>
+        </div>
+      `).join('');
+    }
+
+    let currentCmdPool = searchPool;
+    function runCmdItem(i) {
+      closeModals();
+      currentCmdPool[i].cmd();
+    }
+
+    cmdInput.addEventListener('input', () => {
+      const q = cmdInput.value.toLowerCase();
+      currentCmdPool = searchPool.filter(x => x.name.toLowerCase().includes(q));
+      renderCmdResults(currentCmdPool);
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openCmd();
+      }
+      if(e.key === 'Escape') closeModals();
+      if(e.key.toLowerCase() === 'j') notify('JBG SUBSYSTEM: AUDITING SESSION');
+    });
+
+    // Interactive Systems
+    function triggerOilTest() {
+      notify("DIAGNOSTIC ENGAGED: MEASURING OIL VISCOSITY...");
+      const el = document.getElementById('heroOil');
+      el.innerText = "MEASURING...";
+      setTimeout(() => {
+        el.innerText = "100% GREASY / CHADLITE";
+        el.style.color = "var(--green)";
+        notify("OIL CHECK COMPLETE: ABSOLUTE FAILURE TO COPE");
+      }, 1200);
+    }
+
+    function reqJBG() {
+      notify("INQUIRY SUBMITTED TO JBG CENTRAL BOARD...");
+      setTimeout(() => {
+        alert("REQUEST RECEIVED.\nSTATUS: UNDER REVIEW.\nREVIEW BOARD: JBG\nFINAL DECISION: YES.\n\n(No explanation provided. JBG is law.)");
+        notify("JBG VERDICT ARCHIVED AS BINDING.");
+      }, 800);
+    }
+
+    function ventStench() {
+      const r = document.getElementById('stenchReadout');
+      r.innerText = "CRITICAL DISCHARGE";
+      r.style.color = "var(--red)";
+      notify("ATMOSPHERIC SEAL BROKEN: UNHOLY AIRBORNE FORCE RELEASED");
+      setTimeout(() => {
+        r.innerText = "STABILIZED / GREASY";
+        r.style.color = "var(--green)";
+      }, 2000);
+    }
+
+    // Config Drawer & Local Storage
+    function toggleDrawer() {
+      document.getElementById('settingsDrawer').classList.toggle('active');
+    }
+
+    function updateCfg() {
+      const scan = document.getElementById('cfgScan').checked;
+      const grid = document.getElementById('cfgGrid').checked;
+      const contrast = document.getElementById('cfgContrast').checked;
+      const density = document.getElementById('cfgDensity').value;
+
+      document.body.classList.toggle('no-scan', !scan);
+      document.body.classList.toggle('no-grid', !grid);
+      document.body.classList.toggle('high-contrast', contrast);
+      document.documentElement.setAttribute('data-density', density);
+
+      state.settings = { scan, grid, contrast, density };
+      localStorage.setItem('bp_cfg', JSON.stringify(state.settings));
+      notify("SYSTEM CONFIGURATION SAVED");
+    }
+
+    function resetLocalStorage() {
+      localStorage.clear();
+      notify("CACHE PURGED. RELOADING MAIN SYSTEM...");
+      setTimeout(() => location.reload(), 600);
+    }
+
+    // Easter Egg Mechanics
+    let logoClicks = 0;
+    document.getElementById('logoClick').addEventListener('click', () => {
+      logoClicks++;
+      if(logoClicks === 3) notify("NODE WARNING: 3/7 LOGO ACCESS PINGS DETECTED");
+      if(logoClicks === 7) {
+        logoClicks = 0;
+        document.body.classList.toggle('compromised');
+        notify("EASTER EGG UNLOCKED: ABSURD COMPROMISE MODE ENGAGED");
+      }
+    });
+
+    document.getElementById('secretFooterEgg').addEventListener('click', () => {
+      document.body.classList.toggle('jbg-mode');
+      notify("JBG OVERRIDE COLORWAY LOADED.");
+    });
+
+    // Clock
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('timeDisplay').innerText = now.toTimeString().split(' ')[0] + " UTC";
+    }, 1000);
+
+    // Initial Load
+    renderCurriculum();
+    renderSplit();
+    renderArchive(archives);
+
+    // Load Saved Config
+    if(!state.settings.scan) document.body.classList.add('no-scan');
+    if(!state.settings.grid) document.body.classList.add('no-grid');
+    if(state.settings.contrast) document.body.classList.add('high-contrast');
+    document.documentElement.setAttribute('data-density', state.settings.density || 'standard');
+    document.getElementById('cfgScan').checked = state.settings.scan !== false;
+    document.getElementById('cfgGrid').checked = state.settings.grid !== false;
+    document.getElementById('cfgContrast').checked = !!state.settings.contrast;
+    document.getElementById('cfgDensity').value = state.settings.density || 'standard';
+  </script>
+</body>
+</html>
